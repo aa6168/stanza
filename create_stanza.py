@@ -13,8 +13,9 @@ import sys, os
 
 __version__ = 0.1
 __date__ = '2019-04-04'
-__updated__ = '2019-04-05'
+__updated__ = '2019-04-07'
 __database__ = "myquotas.db"
+__min_python_ver__ = (3, 5)
 
  
 def create_stanza_content(users_limits):
@@ -136,9 +137,12 @@ def main(argv=None):
     '''Command line options.'''
 
     try:
-        assert sys.version_info >= (3, 5)
+        assert sys.version_info >= __min_python_ver__
     except Exception as e:
-        print("We cannot continue.\nWe need python 3.5 or greater.\n")
+        print("We cannot continue.\nWe need python {}.{} "
+              "or greater.\n".format(__min_python_ver__[0],
+                                     __min_python_ver__[1]))
+        print("We found:")
         print(sys.version)
         print("\n")
         return
